@@ -109,6 +109,7 @@ def convert_column_to_int_or_id(type, column, registry=None):
                    required=not (getattr(column, 'nullable', True)))
 
 
+
 @convert_sqlalchemy_type.register(types.Boolean)
 def convert_column_to_boolean(type, column, registry=None):
     return Boolean(description=column.doc, required=not (column.nullable))

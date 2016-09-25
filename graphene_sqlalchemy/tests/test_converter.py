@@ -118,6 +118,7 @@ def test_should_label_convert_int():
     graphene_type = convert_sqlalchemy_column(label)
     assert isinstance(graphene_type, graphene.Int)
 
+
 def test_should_choice_convert_enum():
     TYPES = [
         (u'es', u'Spanish'),
