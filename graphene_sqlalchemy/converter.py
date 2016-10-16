@@ -8,7 +8,10 @@ from graphene import (ID, Boolean, Dynamic, Enum, Field, Float, Int, List,
 from graphene.relay import is_node
 from graphene.types.json import JSONString
 
+from graphene_postgres_range_converter.postgres_range import JSONRangeString
+
 from .fields import SQLAlchemyConnectionField
+
 
 try:
     from sqlalchemy_utils import ChoiceType, JSONType, ScalarListType
@@ -147,9 +150,8 @@ def convert_json_to_string(type, column, registry=None):
 
 @convert_sqlalchemy_type.register(postgresql.TSRANGE)
 @convert_sqlalchemy_type.register(postgresql.TSTZRANGE)
-def convert_posgres_range_to_string(type, column, registry=None):
-    graphene_type = convert_sqlalchemy_type(column.type.item_type, column)
-    return List(graphene_type, description=column.doc, required=not (column.nullable))
+def convert_postgres_range_to_string(type, column, registry=None):
+    return JSONRangeString(description=column.doc, required=not (column.nullable))
 
 
 @convert_sqlalchemy_type.register(JSONType)
