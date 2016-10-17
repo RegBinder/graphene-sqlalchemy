@@ -9,6 +9,7 @@ from graphene.relay import is_node
 from graphene.types.json import JSONString
 
 from graphene_postgres_range_converter.postgres_range import JSONRangeString
+from citext import CIText
 
 from .fields import SQLAlchemyConnectionField
 
@@ -96,6 +97,7 @@ def convert_sqlalchemy_type(type, column, registry=None):
 @convert_sqlalchemy_type.register(types.Enum)
 @convert_sqlalchemy_type.register(postgresql.ENUM)
 @convert_sqlalchemy_type.register(postgresql.UUID)
+@convert_sqlalchemy_type.register(CIText)
 def convert_column_to_string(type, column, registry=None):
     return String(description=getattr(column, 'doc', None),
                   required=not (getattr(column, 'nullable', True)))

@@ -36,6 +36,7 @@ setup(
         'graphene>=1.0',
         'SQLAlchemy',
         'singledispatch>=3.4.0.3',
+        'sqlalchemy-citext>=1.3'
     ],
     tests_require=[
         'pytest>=2.7.2',
